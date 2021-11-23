@@ -28,7 +28,7 @@ import LogoFull from './LogoFull';
 import LogoIcon from './LogoIcon';
 import { NavLink } from 'react-router-dom';
 import { GraphiQLIcon } from '@backstage/plugin-graphiql';
-import { WithPermission } from '@backstage/plugin-permission';
+import { WithPermission } from '@backstage/plugin-permission-react';
 import { scaffolderRoutePermission } from '@backstage/plugin-scaffolder';
 import { Settings as SidebarSettings } from '@backstage/plugin-user-settings';
 import { SidebarSearchModal } from '@backstage/plugin-search';

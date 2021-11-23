@@ -14,30 +14,37 @@
  * limitations under the License.
  */
 
-import {
-  ConfigApi,
-  DiscoveryApi,
-  IdentityApi,
-  PermissionApi,
-} from '@backstage/core-plugin-api';
+import { DiscoveryApi, IdentityApi } from '@backstage/core-plugin-api';
+import { PermissionApi } from './PermissionApi';
 import {
   AuthorizeRequest,
   AuthorizeResponse,
   PermissionClient,
 } from '@backstage/plugin-permission-common';
+import { Config } from '@backstage/config';
 
+/**
+ * The default implementation of the PermissionApi, which simply calls the authorize method of the given
+ * {@link @backstage/plugin-permission-common#PermissionClient}.
+ * @public
+ */
 export class IdentityPermissionApi implements PermissionApi {
-  private readonly permissionClient: PermissionClient;
-
   constructor(
-    discoveryApi: DiscoveryApi,
+    private readonly permissionClient: PermissionClient,
     private readonly identityApi: IdentityApi,
-    configApi: ConfigApi,
-  ) {
-    this.permissionClient = new PermissionClient({
-      discoveryApi,
-      configApi,
-    });
+  ) {}
+
+  static create({
+    configApi,
+    discoveryApi,
+    identityApi,
+  }: {
+    configApi: Config;
+    discoveryApi: DiscoveryApi;
+    identityApi: IdentityApi;
+  }) {
+    const permissionClient = new PermissionClient({ discoveryApi, configApi });
+    return new IdentityPermissionApi(permissionClient, identityApi);
   }
 
   async authorize(

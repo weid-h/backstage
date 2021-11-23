@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 
-export * from './components';
-export * from './hooks';
+export { usePermission } from './usePermission';
+export type { AsyncPermissionResult } from './usePermission';
