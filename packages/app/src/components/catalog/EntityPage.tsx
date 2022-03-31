@@ -535,7 +535,7 @@ const apiPage = (
           <EntityAboutCard />
         </Grid>
         <Grid item md={6} xs={12}>
-          <EntityCatalogGraphCard variant="gridItem" height={400} />
+          <EntityCatalogGraphCard variant="gridItem" height={400} viewGraphDepth={1} />
         </Grid>
         <Grid item xs={12}>
           <Grid container>
